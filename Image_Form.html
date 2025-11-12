@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Product Image</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 40px;
+        }
+        form {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        h2 { text-align: center; color: #333; }
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover { background: #45a049; }
+    </style>
+</head>
+<body>
+
+<h2>? Upload Product Image</h2>
+
+<form action="Images" method="post" enctype="multipart/form-data">
+    <label>Select Image:</label>
+    <input type="file" name="image" accept="image/*" required>
+
+    <label>Product Name:</label>
+    <input type="text" name="Product_name" placeholder="Enter Product Name" required>
+
+    <label>Seller Name:</label>
+    <input type="text" name="Seller_name" placeholder="Enter Seller Name" required>
+
+    <input type="submit" value="Upload">
+</form>
+
+</body>
+</html>

@@ -11,7 +11,7 @@
       --shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
       --radius: 14px;
     }
-    { box-sizing: border-box; margin: 0; padding: 10px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       height: 100vh;
       display: flex;
@@ -21,25 +21,25 @@
       font-family: 'Inter', system-ui, sans-serif;
       color: var(--text);
       overflow: hidden;
-      background: linear-gradient(0deg, #667eea, #764ba2, #ff6a00, #ffcc00);
+      background: linear-gradient(270deg, #667eea, #764ba2, #ff6a00, #ffcc00);
       background-size: 800% 800%;
-      animation: gradientAnimation 10s ease infinite;
+      animation: gradientAnimation 20s ease infinite;
       position: relative;
     }
     /* Animated gradient */
     @keyframes gradientAnimation {
-      0% { background-position: 50% 100%; }
-      50% { background-position: 50% 0%; }
-      100% { background-position: 50% 100%; }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     h1 {
     font-size: 3.5rem;
     margin-bottom: 60px;
     text-align: center;
-    text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
-    animation: fadeInDown 1s ease-out forwards;
-    z-index: 2;
-    position: relative;
+      text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+      animation: fadeInDown 1s ease-out forwards;
+      z-index: 2;
+      position: relative;
     }
     .btn-container {
       display: flex;
@@ -65,6 +65,7 @@
       backdrop-filter: blur(10px);
       animation: floatUp 1.5s ease-in-out infinite alternate, fadeIn 1s ease forwards;
     }
+
     .btn:hover {
       background: var(--btn-hover);
       transform: translateY(-6px) scale(1.1);
@@ -87,6 +88,31 @@
       0% { opacity: 0; transform: translateY(-50px); }
       100% { opacity: 1; transform: translateY(0); }
     }
+
+    /* Particle container */
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: floatParticle linear infinite;
+    }
+
+    @keyframes floatParticle {
+      0% { transform: translateY(0) translateX(0); opacity: 0.5; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+    }
     @media(max-width: 600px) {
       .btn-container { flex-direction: column; gap: 25px; }
       h1 { font-size: 2.5rem; margin-bottom: 40px; }
@@ -99,6 +125,26 @@
   <div class="btn-container">
     <a href="BuyerLog.jsp" class="btn">BUYER</a>
     <a href="Sellerlog.jsp" class="btn">SELLER</a>
+     <a href="Adminlog.jsp" class="btn">Admin</a>
   </div>
+  <!-- Particle background -->
+  <div class="particles" id="particles"></div>
+
+  <script>
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 50;
+
+    for(let i = 0; i < particleCount; i++){
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 6 + 4; // 4px - 10px
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+      particle.style.animationDelay = `${Math.random() * 10}s`;
+      particlesContainer.appendChild(particle);
+    }
+  </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
-<%@ page import="java.util.*, javax.servlet.http.*" %>
-<%@ page import="Minor_Project.*" %>
+ <%@ page import="java.util.*, javax.servlet.http.*" %>
+<%@ page import="Product.*" %>
 <%@ page contentType="application/json;charset=UTF-8" language="java" %>
 <%
     request.setCharacterEncoding("UTF-8");
@@ -25,7 +25,9 @@
     {
         double price = 0;
         try{ price = Double.parseDouble(priceStr); } catch(Exception ex)
-        {}
+        {
+        
+        }
             
         boolean found = false;
         for(Product p : cart){

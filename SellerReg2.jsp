@@ -12,7 +12,7 @@
        Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Seller?autoReconnect=true&useSSL=false","root","root");
        
        Statement st=con.createStatement();
-       st.executeUpdate("insert into SRegister values('"+s1+"','"+s2+"','"+s4+"','"+s3+"')");
+       st.executeUpdate("insert into SRegister values('"+s1+"','"+s2+"','"+s3+"','"+s4+"')");
        out.print("Data Inserted");
        
        String Create_Database = "CREATE TABLE IF NOT EXISTS `" +"Seller_"+s4 + "` (" +

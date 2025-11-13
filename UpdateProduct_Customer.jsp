@@ -2,6 +2,16 @@
 <%@ page contentType="text/plain;charset=UTF-8" language="java" %>
 
 <%
+            session = request.getSession(false);
+        if (session == null || session.getAttribute("Customer_name") == null) {
+            response.sendRedirect("BuyerLog.jsp");
+            return;
+        }
+
+%>
+
+
+<%
 String productName = request.getParameter("productName");
 String tableName = request.getParameter("tableName");
 int quantity = Integer.parseInt(request.getParameter("quantity"));

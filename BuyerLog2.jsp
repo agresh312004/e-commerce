@@ -1,35 +1,57 @@
-<%-- 
-    Document   : BuyerLog2
-    Created on : 12 Sep, 2025, 7:36:10 PM
-    Author     : DAKSH
---%>
-<%@ page import="java.sql.*"  %>
+<%@ page import="java.sql.*" %>
 <%
-                String s1=request.getParameter("Email");
-		String s2=request.getParameter("Password");
-		try
-		{
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			
-			Connection  con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Seller?autoReconnect=true&useSSL=false","root","root");
-			
-                       Statement st=con.createStatement();
-			ResultSet rs=st.executeQuery("Select * from bregister where Email_id='"+s1+"' AND Password='"+s2+"'");
-			if(rs.next())
-			{
-                           out.println("Data Finded");
-                           response.sendRedirect("Customer_interface.jsp");
-			}
-			else
-			{  
-				out.println("INVLAID NAME AND PASSWORD");
-			}
-			con.close();
-		}
-		catch(Exception e)
-		{
-			out.println(e);
-		}
-        out.println("Data inserted");
+    // Retrieve parameters from the login form
+    String email = request.getParameter("Email");
+    String password = request.getParameter("Password");
 
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+        // 1. Load the JDBC Driver
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        
+        // 2. Establish Connection
+        con = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/Seller?autoReconnect=true&useSSL=false",
+            "root", "root"
+        );
+        
+        // 3. Prepare SQL Statement using placeholders (?) for security
+        // We select the 'Name' column to save it in the session.
+        String sql = "SELECT Name FROM bregister WHERE Email_id = ? AND Password = ?";
+        ps = con.prepareStatement(sql);
+        
+        // Set the parameters
+        ps.setString(1, email);
+        ps.setString(2, password);
+        
+        // 4. Execute Query
+        rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            // Login Successful
+            
+            
+            // Set the customer's name in the session
+            session.setAttribute("Customer_name", email);
+            
+            out.println("Login successful. Data Found.");
+            
+            // Redirect to the customer interface
+            response.sendRedirect("Customer_interface.jsp");
+        } else {
+            // Login Failed
+            out.println("INVALID EMAIL OR PASSWORD");
+        }
+        
+    } catch(Exception e) {
+        out.println("An error occurred: " + e.getMessage());
+    } finally {
+        // 5. Close resources to prevent leaks
+        try { if (rs != null) rs.close(); } catch (SQLException ignored) {}
+        try { if (ps != null) ps.close(); } catch (SQLException ignored) {}
+        try { if (con != null) con.close(); } catch (SQLException ignored) {}
+    }
 %>

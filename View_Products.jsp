@@ -9,11 +9,9 @@
     <title>Product Inventory</title>
 
     <style>
-        /* ---------------------- BACKGROUND ---------------------- */
         body {
             font-family: 'Poppins', sans-serif;
-            background: url('4aa8f45f74b347302309da315df7ce2d.jpg') no-repeat center center/cover, 
-                        linear-gradient(135deg, #2193b0, #6dd5ed); /* Combine background image with gradient */
+            background: linear-gradient(135deg, #2193b0, #6dd5ed);
             margin: 0;
             padding: 0;
             display: flex;
@@ -22,23 +20,20 @@
             height: 100vh;
         }
 
-        /* ---------------------- CONTAINER (Transparent Effect) ---------------------- */
         .container {
             width: 90%;
             max-width: 1000px;
-            background: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
+            background: #fff;
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             overflow-y: auto;
             max-height: 85vh;
-            backdrop-filter: blur(10px); /* Frosted glass effect */
         }
 
-        /* ---------------------- FORM CONTENT ---------------------- */
         h2 {
             text-align: center;
-            color: #fff; /* White text to contrast against the background */
+            color: #333;
             margin-bottom: 20px;
         }
 
@@ -50,12 +45,12 @@
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 15px;
-            background-color: rgba(250, 250, 250, 0.8); /* Slight transparency for product cards */
+            background-color: #fafafa;
             transition: 0.3s;
         }
 
         .product-card:hover {
-            background-color: rgba(234, 246, 255, 0.9); /* Hover effect with increased transparency */
+            background-color: #eaf6ff;
         }
 
         .product-info {
@@ -186,5 +181,5 @@
             <a href="Seller_Interface.jsp" class="back-btn">← Back</a>
         </div>
 
-</body>
-</html>
+        </body>
+        </html>

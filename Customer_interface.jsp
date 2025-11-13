@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Customer Shopping Interface</title>
+<%
+            session = request.getSession(false);
+        if (session == null || session.getAttribute("Customer_name") == null) {
+            response.sendRedirect("BuyerLog.jsp");
+            return;
+        }
+
+%>
 
 <style>
 body {
@@ -102,7 +110,7 @@ button:hover {
 
 <div class="top-bar">
     <h1>🛍️ Customer Shopping Interface</h1>
-    <button class="profile-btn" onclick="window.location.href='Profile.jsp'">Profile</button>
+    <button class="profile-btn" onclick="window.location.href='Customer_Profile.jsp'">Profile</button>
 </div>
 
 <div class="filter-bar">
@@ -157,6 +165,7 @@ button:hover {
             }
 
             ResultSet rs2 = ps.executeQuery();
+            int id=0;
 
             while (rs2.next()) {
                 String name = rs2.getString("Name");
@@ -178,7 +187,7 @@ button:hover {
                 }
 
                 if (existing == null) {
-                    Product article = new Product(tableName, name, category, quantity, imageName, imagePath, price, expiry);
+                    Product article = new Product(id++,tableName, name, category, quantity, imageName, imagePath, price, expiry);
                     article.setSelect(false);
                     article.setQuantitySelected(0);
                     orderList.add(article);
